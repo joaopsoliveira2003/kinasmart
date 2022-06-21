@@ -1,0 +1,283 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block conteudo %}
+<style>
+    a:hover {
+        color: #e94e1b;
+    }
+    .btn-secondary:hover {
+        background-color: #e94e1b;
+        border-color: #e94e1b;
+    }
+
+    .form-control:focus {
+        border-color: #e94e1b !important;
+        box-shadow: 0 0 0 .2rem rgba(233, 78, 27, .25) !important;
+    }
+    .fill-control-input {
+        display: none;
+    }
+    .checkbox-checked {
+        background-color: #e94e1b !important;
+        border-color: #e94e1b !important;
+        background-size: 80% !important;
+    }
+    .fill-control-indicator {
+        border-radius: 3px;
+        display: inline-block;
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: 16px;
+        height: 16px;
+        border: 2px solid #aaa;
+        transition: .3s;
+        background: transparent;
+        background-size: 0%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+    }
+</style>
+<div class="w-100 h-100-modified row justify-content-center align-items-center ml-0">
+    <div class="col-md-6 text-center">
+        <br>
+        <h5 class="cinzento bold text-uppercase">
+            {% if lang == "pt" %}
+            Não encontrou o que procura?
+            <br>
+            Contacte-nos para mais informações.
+            {% else %}
+            Haven’t found what you are looking for?
+            <br>
+            Contact us for further information.
+            {% endif %}
+        </h5>
+        <form method="post" action="{% url 'contacts' %}" style="padding: 0px 30px 0px 30px">
+            {% csrf_token %}
+            {% if erro == 1 %}
+            <br>
+            <div class="alert alert-danger alert-dismissible fade show" style="padding-bottom: 10px; padding-right: 30px; padding-left: 10px;">
+                <button type="button" class="close" data-dismiss="alert" style="padding: 0px;"><span class="material-icons user-select-none">clear</span></button>
+                <strong>
+                    {% if lang == "pt" %}
+                    Erro!
+                    {% else %}
+                    Error!
+                    {% endif %}
+                </strong>
+                {% if lang == "pt" %}
+                Preencha corretamente o formulário!
+                {% else %}
+                Fill in the form correctly!
+                {% endif %}
+            </div>
+            {% elif erro == 0 %}
+            <br>
+            <div class="alert alert-success alert-dismissible fade show" style="padding-bottom: 10px; padding-right: 30px; padding-left: 10px;">
+                <button type="button" class="close" data-dismiss="alert" style="padding: 0px;"><span class="material-icons user-select-none">clear</span></button>
+                <strong>
+                    {% if lang == "pt" %}
+                    Sucesso!
+                    {% else %}
+                    Success!
+                    {% endif %}
+                </strong>
+                {% if lang == "pt" %}
+                Pode continuar a utilizar o nosso Website!
+                {% else %}
+                You can continue using our website!
+                {% endif %}
+            </div>
+            {% endif %}
+            <div class="row justify-content-center">
+                <!-- Nome -->
+                <div class="col-xl-5 pt-4">
+                    <label class="sr-only" for="name">
+                        {% if lang == "pt" %}
+                        Nome
+                        {% else %}
+                        Name
+                        {% endif %}
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <!-- icon nome -->
+                                <span class="material-icons user-select-none md-18">person</span>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" id="name" name="nome"
+                        placeholder="{% if lang == 'pt' %}Nome{% else %}Name{% endif %}"
+                        {% if form.nome.value != None %}value="{{form.nome.value}}" {% endif %} required>
+                    </div>
+                </div>
+                <div class="col-xl-" style="height: 1px;">&emsp;</div>
+                <!-- Email -->
+                <div class="col-xl-5 pt-4">
+                    <label class="sr-only" for="email">Email</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <!-- icon email -->
+                                <span class="material-icons user-select-none md-18">email</span>
+                            </div>
+                        </div>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                            {% if form.mensagem.value != None %}value="{{form.email.value}}" {% endif %} required>
+                    </div>
+                </div>
+                <!-- Mensagem -->
+                <div class="form-group col-lg-12 pt-2">
+                    <label for="msg">
+                        {% if lang == "pt" %}
+                        Mensagem
+                        {% else %}
+                        Message
+                        {% endif %}
+                    </label>
+                    <textarea class="form-control" id="msg" rows="6" name="mensagem" required>{% if form.mensagem.value != None %}{{form.mensagem.value}}{% endif %}</textarea>
+                </div>
+            </div>
+            <!-- Check Termos -->
+            <div class="form-check">
+                <label for="terms">
+                <table>
+                <tr>
+                    <td><span style="position: static !important;" class="fill-control-indicator"></span></td>
+                    <td>
+                        <input id="terms" class="fill-control-input" type="checkbox" name="terms" required>
+                        <span class="fill-control-description" style="padding-left: 10px;">
+                            {% if lang == "pt" %}
+                            Li e aceito os <a href="" class="laranja" data-toggle="modal"
+                                data-target="#termos_condicoes">termos e condições</a>.
+                            {% else %}
+                            I’ve read and accept the <a href="" class="laranja" data-toggle="modal"
+                                data-target="#termos_condicoes">Terms and Conditions</a>.
+                            {% endif %}
+                        </span> 
+                    </td>
+                </tr> 
+                </table>                        
+                </label>
+                <script>
+                    $("#terms").change(() => {
+                        $(".fill-control-indicator").toggleClass("checkbox-checked")
+                    })
+                </script>
+                <!-- Termos e condicoes -->
+                <div class="modal fade" id="termos_condicoes" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title bold cinzento" id="exampleModalLongTitle">
+                                    {% if lang == "pt" %}
+                                    Termos e Condições
+                                    {% else %}
+                                    Terms and conditions
+                                    {% endif %}
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span class="material-icons user-select-none">clear</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-justify" style="font-size: medium;">
+                                {% if lang == "pt" %}
+                                Os dados pessoais facultados destinam-se a ser utilizados pela Kinasmart e servem apenas
+                                para dar resposta ao pedido de contacto efetuado e para futuros contactos comerciais com
+                                a entidade.
+                                <br>
+                                A Kinasmart, assume que os dados facultados foram inseridos pelo(s) respetivo(s)
+                                titular(es) ou que a sua recolha foi autorizada pelos mesmos.
+                                <br>
+                                Os dados facultados encontram-se sujeitos a sigilo, sendo garantido ao titular o direito
+                                de acesso, retificação, supressão, ou oposição dos mesmos nos termos da lei, mediante
+                                pedido para o e-mail <a href="mailto:kinasmart@kinasmart.com"
+                                    class="laranja">kinasmart@kinasmart.com</a>
+                                {% else %}
+                                The personal data provided are intended for use by Kinasmart and serve only to reply to
+                                the contact request and for future business contacts with the entity.
+                                <br>
+                                Kinasmart assumes that the data provided was entered by the respective holder(s) or that
+                                its collection was authorized by them.
+                                <br>
+                                The data provided are subject to confidentiality, and the holder(s) is guaranteed the
+                                right to access, rectify, delete, or oppose to its use under the terms of the law, upon
+                                request to the email:
+                                <a href="mailto:kinasmart@kinasmart.com"
+                                    class="laranja">kinasmart@kinasmart.com</a>
+                                {% endif %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    {% if lang == "pt" %}
+                                    Fechar
+                                    {% else %}
+                                    Close
+                                    {% endif %}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><br>
+            <!-- Enviar -->
+            <div class="col">
+                <button type="submit" class="btn btn-secondary">
+                    {% if lang == "pt" %}
+                    Enviar
+                    {% else %}
+                    Send
+                    {% endif %}
+                </button>
+                <br><br>
+            </div>
+        </form>
+    </div>
+
+    <!-- Imagem na lateral -->
+    <div class="col-md-6 text-center">
+        <br>
+        <img src="{% static '/img/esbocos/lado.jpg' %}" class="img-fluid img-thumbnail d-flex mx-auto rounded"/>
+        <br>
+    </div>
+</div>
+<div class="w-100 row justify-content-center align-items-center ml-0 h-100-modified">
+    <div class="col-md-6 text-center">
+        <!-- Morada -->
+        <h5 class="cinzento bold text-uppercase">
+            {% if lang == "pt" %}
+            Onde estamos
+            {% else %}
+            Where we are
+            {% endif %}
+        </h5>
+        <a>
+            Zona Industrial de Oiã<br>
+            Rua do Vale Grande, Lote C20<br>
+            3770-051 Oiã
+            <br><br>
+        </a>
+        <!-- Contactos -->
+        <h5 class="cinzento bold text-uppercase">
+            {% if lang == "pt" %}
+            Contactos:
+            {% else %}
+            Contacts:
+            {% endif %}
+        </h5>
+        <div>
+            Tel.: <a class="laranja" href="tel:+351234726348">+351 234 726 348</a>
+            <br>
+            Email: <a class="laranja" href="mailto:kinasmart@kinasmart.com">kinasmart@kinasmart.com</a>
+        </div>
+    </div>
+    <!-- Mapa -->
+    <div class="col-md-6 text-center">
+        <div class="embed-responsive embed-responsive-16by9" style="filter: grayscale(100%)">
+            <iframe class="img-thumbnail rounded" id="gmap_canvas" src="https://maps.google.com/maps?q=Rua%20do%20Vale%20Grande%2C%20Lote%20C20%203770-051%20Oi%C3%A3&t=&z=7&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}

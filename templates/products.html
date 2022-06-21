@@ -1,0 +1,301 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block conteudo %}
+<style>
+    .banner_img {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100px;
+        z-index: 2;
+	    background-color: black;
+        {% if id == -1 %}
+            background-image: url("{% static '/img/banner.jpg' %}");
+        {% else %}
+            background-image: url("{{categoria.0.imagem_topo.url}}");
+        {% endif %}
+    }
+
+    .desceu0 {
+        padding-top: 40px !important;
+    }
+    .desceu1 {
+        padding-top: 16px !important;
+    }
+    .breadcrumb {
+        padding-top: 60px;
+        padding-left: 5px;
+        padding-right: 42px;
+        background-color: transparent;
+        font-size: 18px;
+    }
+    .breadcrumb-item a, .breadcrumb-item + .breadcrumb-item::before {
+        color: white !important;
+        content: ">";
+    }
+    #procura a:hover {
+        color: #e94e1b;
+    }
+    .icon_modal{
+        margin: 0px; 
+        font-size: 32px;
+        cursor:  pointer;
+        color: #000;
+        opacity: .5;
+    }
+</style>
+<div class="w-100 banner_img position-fixed overflow-hidden">
+    <ul class="breadcrumb bold text-left">
+        <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+                {% if lang == "pt" %}
+                    Início
+                {% else %}
+                    Home
+                {% endif %}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{% url 'products' %}">
+                {% if lang == "pt" %}
+                    Produtos
+                {% else %}
+                    Products
+                {% endif %}
+            </a>
+        </li>
+        {% if id != -1 %}
+            <li class="breadcrumb-item">
+                <a id="breadcrumb-name" href="{% url 'products' id=categoria.0.id %}">
+                    {% if lang == "pt" %}
+                        {{categoria.0.tituloPT|capfirst}}
+                    {% else %}
+                        {{categoria.0.tituloEN|capfirst}}
+                    {% endif %}
+                </a>
+            </li>
+        {% endif %}
+      </ul> 
+</div>
+<div class="h-100-modified" style="padding: 120px 30px 30px 30px">
+    {% if id == -1 %}
+        <div class="row justify-content-center">
+            {% for produto in categoria %}
+            <div class="col-xl-4 col-md-4 col-sm-6" style="padding: 0px 15px 0px 15px">
+                <div class="card rounded" style="background-color: #f6f5f6; border: 2px solid transparent; max-height: 90%;">
+                    <img class="card-img-top mx-auto d-block" src="{{produto.imagem.url}}" alt="{% if lang == 'pt' %}{{produto.tituloPT|capfirst}}{% else %}{{produto.tituloEN|capfirst}}{% endif %}" style="width: 40%; height: 40%;">
+                    <div class="card-body" style="margin-bottom: 10px !important;">
+                        <h5 class="card-text bold">
+                            {% if lang == "pt" %}
+                            {{produto.tituloPT|capfirst}}
+                            {% else %}
+                            {{produto.tituloEN|capfirst}}
+                            {% endif %}
+                        </h5>
+                        <a href="{% url 'products' id=produto.id %}" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <h5 class="pt-5 bold">
+                {% if lang == "pt" %}
+                Não existem produtos!
+                {% else %}
+                There are no products!
+                {% endif %}
+            </h5>
+            {% endfor %}
+        </div>
+    {% else %}
+        {% for produ in subcategoria %}
+            <h5 id="title{{produ.id}}" class="bold titles">
+                {% if lang == "pt" %}
+                    {{produ.tituloPT|capfirst}}
+                {% else %}
+                    {{produ.tituloEN|capfirst}}
+                {% endif %}
+            </h4>
+            <div id="div{{produ.id}}" class="divsprod row justify-content-center">
+                {% for imag in imagem %}
+                    {% if imag.subcategoria == produ %}
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" style="padding: 15px 20px 15px 20px">
+                            <div class="card rounded" style="background-color: #f6f5f6; border: 2px solid transparent; overflow: hidden">
+                                <img id="img{{imag.id}}" class="img-fluid mx-auto d-block imgsprod" src="{{imag.imagem.url}}" alt="Image" style="max-width: 250px; padding: 10px 0px 10px 0px;">
+                                <a style="cursor: pointer" class="stretched-link" onclick="showmodal(this)"></a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <h4 id="noprod" class="bold pt-5" style="display: none">
+            {% if lang == "pt" %}
+            Imagens indisponíveis!
+            {% else %}
+            Unavailable images!
+            {% endif %}
+        </h4>
+        <h5 id="procura" class="bold text-uppercase">
+            <br>
+            <a style="cursor: pointer" class="cinzento" href="{% url 'contacts' %}">
+                {% if lang == "pt" %}
+                Não encontrou o que procura?
+                <br>
+                Contacte-nos para mais informações!
+                {% else %}
+                Haven’t found what you are looking for?
+                <br>
+                Contact us for further information!
+                {% endif %}
+            </a>
+        </h5>
+        <div id="modal" class="modal fade" style="display: none;" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered h-100 modal-lg modal-dialog-scrollable d-flex justify-content-center">
+                <div class="modal-content">
+                    <div class="modal-header text-right" style="padding: 5px">
+                        <button class="close" type="button" data-dismiss="modal">
+                            <span class="material-icons user-select-none">clear</span> 
+                        </button>
+                    </div>
+                    <div class="modal-body" style="background-color: #f6f5f6;">
+                        <div class="container h-100">
+                            <img id="imgmodal" class="mh-100 mx-auto d-block img-fluid" src="">
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center" style="padding: 0px">
+                        <a onclick="first_img()">
+                            <span class="icon_modal material-icons close user-select-none">first_page</span> 
+                        </a>  
+                        <a onclick="prev_img()">
+                            <span class="icon_modal material-icons close user-select-none">navigate_before</span>
+                        </a> 
+                        <span class="font-weight-bold" style="font-size: 18px !important; color: #808080">
+                            <span id="imgatual">0</span>/<span id="imgmax">0</span>
+                        </span>
+                        <a onclick="next_img()">
+                            <span class="icon_modal material-icons close user-select-none">navigate_next</span>
+                        </a>
+                        <a onclick="last_img()">
+                            <span class="icon_modal material-icons close user-select-none">last_page</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+        <script>
+            function calcdesceu(){
+                firstlibott = firstli.position().top + firstli.height()
+                lastlibott = lastli.position().top + lastli.height()
+
+                desceu = []
+                for(let i=1; i<=3;i++) {desceu.push(firstli.height()*i+firstlibott <= lastlibott)}
+            }
+            function ajustar_localizacao(){
+                let anome = lastli.children().first()
+                anome.text(nomecat)
+                calcdesceu()
+                if(desceu[2]){
+                    while(desceu[2]){ 
+                        anome.text(nomecat.slice(0,anome.text().length-1))
+                        calcdesceu()
+                    }
+                    anome.text(anome.text().slice(0,-3)+"...")
+                }
+
+                let ul = $(".breadcrumb")
+                if(desceu[1]){
+                    ul.removeClass("desceu0")
+                    ul.addClass("desceu1")
+                } else if(desceu[0]){
+                    ul.removeClass("desceu1")
+                    ul.addClass("desceu0")
+                } else{ul.removeClass(["desceu0", "desceu1"])}
+            }
+            $(window).resize(() => {
+                calcdesceu()
+                ajustar_localizacao()
+            })
+
+            let nomecat, lastli, firstli, lastlibott, firstlibott
+            let imgs, pos_at, subcat_at
+
+            $(() => {
+                lastli = $(".breadcrumb").first().children().last()
+                firstli = lastli.parent().children().first()
+                nomecat = lastli.text()
+                
+                calcdesceu()
+                ajustar_localizacao()
+
+                let titles = [] 
+                $(".titles").each((index,value) => {titles.push(value.id)})
+
+                let nimgs = []
+                $(".divsprod").each((index,value) => {nimgs.push($("#" + value.id + " .imgsprod").length)})
+
+                let no_prod = true
+                nimgs.forEach((value,index) => {
+                    if(value == 0){
+                        $("#" + titles[index]).hide()
+                    }else{
+                        no_prod = false
+                    }
+                })
+
+                if(no_prod){
+                    $("#noprod").css("display", "block")
+                    $("#procura").css("display", "none")
+                } else {
+                    imgs = []
+                    $(".divsprod").each((index,value) => {
+                        imgs.push([])
+                        $(value).find("img").each((index1,value1) => {imgs[imgs.length-1].push(value1.id)})
+                    })
+                }
+            })
+            function changeimg(){
+                $("#imgmodal").attr("src", $("#"+imgs[subcat_at][pos_at]).attr("src"))
+                $("#imgatual").text(pos_at + 1)
+                $("#imgmax").text(imgs[subcat_at].length)
+            }
+            function showmodal(a_img){
+                imgs.forEach((value,index)=>{
+                    let pos_img = $.inArray($(a_img).parent().find(".imgsprod").attr("id"), value)
+                    if(pos_img != -1){
+                        pos_at = pos_img
+                        subcat_at = index
+                    }
+                })
+                changeimg()
+	            $("#modal").modal("show")
+            }
+
+            function first_img(){
+                pos_at = 0
+                changeimg()
+            }
+            function last_img(){
+                pos_at = imgs[subcat_at].length-1
+                changeimg()
+            }
+            function prev_img(){
+                if(pos_at == 0){
+                    last_img()
+                } else{
+                    pos_at--
+                    changeimg()
+                }
+            }
+            function next_img(){
+                if(pos_at == imgs[subcat_at].length-1){
+                    first_img()
+                } else{
+                    pos_at++
+                    changeimg()
+                }
+            }
+        </script>
+    {% endif %}
+</div>
+{% endblock %}

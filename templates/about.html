@@ -1,0 +1,180 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block conteudo %}
+<style>
+    .about div {
+        max-height: 100px !important;
+        max-width: 100px !important;
+    }
+    .icons-about img{
+        max-width: 100px;
+        max-height: 100px;
+    }
+    @media screen and (min-width: 992px) {
+        .img-about {
+            position: fixed;
+            top: 23%;
+            right: 1%;
+            left: 52%;
+            
+        }
+    }
+    @media screen and (max-width: 576px) {
+        .text-justify {
+            text-align: center !important;
+        }
+    }
+</style>
+<div class="col-lg-12 ml-0 row">
+    <div class="col-lg-6" style="padding: 20px 30px 20px 30px">
+        <!-- Quem Somos -->
+        <h5 class="text-justify bold cinzento text-uppercase">
+            {% if lang == "pt" %}
+            Quem Somos
+            {% else %}
+            Who We Are
+            {% endif %}
+        </h5>
+        <p class="text-justify">
+            {% if lang == "pt" %}
+            Acumulando o saber fazer de mais de uma década, a <span style="color: #e94e1b">Kinasmart</span>
+            existe para oferecer aos seus clientes, produtos e serviços de
+            qualidade, concebidos a pensar na operacionalidade e
+            agradabilidade de utilização.
+            <br><br>
+            Especializamo-nos na produção das mais vanguardistas soluções
+            em equipamento de espaços comerciais, industriais e sociais,
+            produzidos especificamente e com todo o detalhe para cada cliente.
+            {% else %}
+            Accumulating the expertise of more than a decade, we exist to offer our customers high quality services and
+            products, conceived targeting their operability and amenity.
+            <br><br>
+            We are skilled in the production of the most cutting edge equipment solutions for commercial, industrial and
+            social facilities, always minding every single detail.
+            {% endif %}
+        </p>
+        <!-- Lider e excelencia -->
+        <div class="row about justify-content-center align-items-center" style="padding: 10px 0px 10px 0px;">
+            <div class="col-md">
+                <img class="img-fluid mx-auto d-block" src="{% static '/img/pme/excelencia.png' %}">
+            </div>
+            <div class="col-md">
+                <img class="img-fluid mx-auto d-block" src="{% static '/img/pme/lider.png' %}">
+            </div>
+        </div>
+        <br>
+        <h5 class="cinzento bold text-uppercase">
+            {% if lang == "pt" %}
+            Queremos continuar a ser uma referência no nosso escopo de negócio!
+            {% else %}
+            We aim to keep being a reference in our business scope!
+            {% endif %}
+        </h5>
+        <br>
+        <p class="text-justify">
+            {% if lang == "pt" %}
+            Somos uma empresa com um amadurecido sentido de propósito e a
+            nossa seriedade e eficiência garantem-nos a confiança e respeito
+            dos nossos parceiros.
+            <br><br>
+            Fazemos um esforço constante para treinar e reter talento e
+            contribuímos activamente para proporcionar uma vida digna aos
+            nossos colaboradores.
+            {% else %}
+            We are a company with a steady sense of purpose and corporate responsibility, and our reliability and
+            efficiency granted us the trust and respect of our business partners.
+            <br><br>
+            We strive to train and retain talent and we actively contribute to provide our staff with a dignified living.
+            {% endif %}
+        </p>
+        <br><br>
+        <!-- Missao / Visao / Valores -->
+        <div class="w-100 text-center icons-about ml-0">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-">
+                    <img class="img-fluid" src="{% static '/img/icones/missao.png' %}">
+                </div>
+                <div class="col-sm py-3">
+                    <h5 class="text-justify bold laranja text-uppercase">
+                        {% if lang == "pt" %}
+                        Missão
+                        {% else %}
+                        Mission
+                        {% endif %}
+                    </h5>
+                    <p class="text-justify">
+                        {% if lang == "pt" %}
+                        Criar soluções de qualidade que garantam excelência comercial e
+                        operacional.
+                        {% else %}
+                        To create quality solutions that guarantee commercial and
+                        operational excellence.
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            <br>
+            <div class="row justify-content-center align-items-center">
+                <div class="col-">
+                    <img class="img-fluid" src="{% static '/img/icones/valores.png' %}">
+                </div>
+                <div class="col-sm py-3">
+                    <h5 class="text-justify bold laranja text-uppercase">
+                        {% if lang == "pt" %}
+                        Valores
+                        {% else %}
+                        Values
+                        {% endif %}
+                    </h5>
+                    <p class="text-justify">
+                        {% if lang == "pt" %}
+                            Honestidade
+                        {% else %}
+                            Honesty
+                        {% endif %}
+                        <br>
+                        {% if lang == "pt" %}
+                            Fiabilidade
+                        {% else %}
+                            Reliability
+                        {% endif %}
+                        <br>
+                        {% if lang == "pt" %}
+                            Eficiência
+                        {% else %}
+                            Efficiency
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            <div class="row justify-content-center align-items-center">
+                <div class="col-">
+                    <img class="img-fluid" src="{% static '/img/icones/visao.png' %}">
+                </div>
+                <div class="col-sm py-3">
+                    <h5 class="text-justify bold laranja text-uppercase">
+                        {% if lang == "pt" %}
+                        Visão
+                        {% else %}
+                        Vision
+                        {% endif %}
+                    </h5>
+                    <p class="text-justify">
+                        {% if lang == "pt" %}
+                        Inspirados no Futuro.
+                        {% else %}
+                        Inspired by the Future.
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6" style="padding: 20px 30px 20px 30px">
+        <!-- Img front.jpg -->
+        <div class="img-about">
+            <img src="{% static '/img/esbocos/frente.jpg' %}" class="img-fluid img-thumbnail rounded">
+        </div>
+    </div>
+</div>
+{% endblock %}

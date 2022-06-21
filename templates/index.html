@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block conteudo %}
+<style>
+    .bg {
+        background-image: url("{% static 'img/home.jpg' %}");
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding-top: 15%;
+        padding-left: 20%;
+
+    }
+    .bg h1 {
+        color: white !important;
+        text-shadow: 6px 6px 6px black;
+    }
+    .bg span {
+        font-size: 2vh !important;
+        color: white;
+        text-shadow: 3px 3px 3px black;
+    }
+    @media screen and (max-width: 400px) {
+        .bg {
+            padding-left: 10%;
+        }
+    }
+    @media screen and (min-width: 1024px) {
+        .bg {
+            padding-top: 15%;
+            padding-left: 31%;
+        }
+        .bg h1 {
+            font-size: 8vh !important;
+        }
+        .bg span {
+            font-size: 5vh !important;
+        }
+    }
+</style>
+<div class="bg text-left cinzento">
+    <span class="orange-bar"></span>
+    <span class="medium text-uppercase" style="font-size: 20px;">
+        {% if lang == "pt" %}
+        Há Mais de 10 Anos
+        {% else %}
+        For More Than 10 Years
+        {% endif %}
+    </span>
+    <h1 class="bold cinzento text-uppercase" style="font-size: 40px;">
+        {% if lang == "pt" %}
+        Inspirados<br> No Futuro
+        {% else %}
+        Inspired<br> In The Future
+        {% endif %}
+    </h1>
+</div>
+<div class="h-100-modified" style="padding: 15px 30px 0px 30px">
+    <h4 class="extrabold cinzento text-uppercase pt-1">
+        {% if lang == "pt" %}
+        Os Nossos Produtos
+        {% else %}
+        Our Products
+        {% endif %}
+    </h3>
+    <br>
+    <div class="row justify-content-center">
+    {% for produto in categoria %}
+    <div class="col-xl-4 col-md-4 col-sm-6" style="padding: 0px 15px 0px 15px">
+        <div class="card rounded" style="background-color: #f6f5f6; border: 2px solid transparent; max-height: 90%;">
+            <img class="card-img-top mx-auto d-block" src="{{produto.imagem.url}}" alt="{% if lang == 'pt' %}{{produto.tituloPT|capfirst}}{% else %}{{produto.tituloEN|capfirst}}{% endif %}" style="width: 40%; height: 40%;">
+            <div class="card-body" style="margin-bottom: 10px !important;">
+                <h5 class="card-text bold">
+                    {% if lang == "pt" %}
+                    {{produto.tituloPT|capfirst}}
+                    {% else %}
+                    {{produto.tituloEN|capfirst}}
+                    {% endif %}
+                </h5>
+                <a href="{% url 'products' id=produto.id %}" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <h5 class="pt-5 bold">
+        {% if lang == "pt" %}
+        Não existem produtos!
+        {% else %}
+        There are no products!
+        {% endif %}
+    </h5>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

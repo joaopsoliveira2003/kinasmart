@@ -1,0 +1,213 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block conteudo %}
+<style>
+    .services img {
+        max-width: 100px;
+        max-height: 100px;
+    }
+    .carousel-indicators li:hover {
+        background-color: #e94e1b !important;
+    }
+    @media screen and (min-width: 992px) {
+        .carousel {
+            position: fixed;
+            top: 20%;
+            margin-right: 15px;
+        }
+    }
+    @media screen and (max-width: 576px) {
+        .text-justify {
+            text-align: center !important;
+        }
+
+    }
+</style>
+<div class="col-lg-12 ml-0 row justify-content-center align-items-center">
+    <div class="col-lg-6" style="padding: 20px 30px 20px 30px">
+        <!-- O que fazemos -->
+        <h5 class="text-justify cinzento bold text-uppercase">
+            {% if lang == "pt" %}
+            O Que Fazemos?
+            {% else %}
+            What we Do?
+            {% endif %}
+        </h5>
+        <p class="text-justify">
+            {% if lang == "pt" %}
+            Na Kinasmart trabalhamos sempre em parceria e em sintonia com os nossos parceiros.
+            <br>
+            Estudamos, desenvolvemos, fabricamos e instalamos equipamentos concebidos especificamente para apresentação
+            e exposição de produto no seu ponto de venda, direcionando-o de forma ergonómica e apelativa ao cliente
+            final.
+            {% else %}
+            At Kinasmart we act, always, in complete resonance with our clients.
+            <br>
+            We study, develop, manufacture and install equipment specifically designed for product presentation at the
+            point of sale, displaying it ergonomically and appealingly to the end customer.
+            {% endif %}
+        </p>
+        <div class="laranja bold">
+            {% if lang == "pt" %}
+            Metalomecânica<br>
+            Carpintaria<br>
+            {% else %}
+            Metalworking<br>
+            Carpentry<br>
+            {% endif %}
+            Tailor-made<br>
+        </div><br>
+        <p class="text-justify">
+            {% if lang == "pt" %}
+            Complementamos a nossa oferta com fabrico e instalação de outras soluções à medida:
+            {% else %}
+            We complement our range of products by producing and installing bespoken solutions:
+            {% endif %}
+            <ul class="text-justify" style="padding-top: 8px">
+                <li>
+                    {% if lang == "pt" %}
+                    Mobiliário e equipamentos para as áreas sociais de espaços comerciais.
+                    {% else %}
+                    Furniture and displays for stores and other commercial facilities.
+                    {% endif %}
+                </li>
+                <li>
+                    {% if lang == "pt" %}
+                    Sistemas de controlo de fluxo pedestre.
+                    {% else %}
+                    Customer flow and guidance systems.
+                    {% endif %}
+                </li>
+                <li>
+                    {% if lang == "pt" %}
+                    Outros equipamentos que o seu projecto requeira.
+                    {% else %}
+                    Any other equipment that your project may require.
+                    {% endif %}
+                </li>
+            </ul>
+        </p>
+        <p class="text-justify">
+            {% if lang == "pt" %}
+            Os nossos produtos primam pela qualidade e atenção ao detalhe, garantindo excelência comercial e operacional
+            e possibilitando que o cliente final usufrua do seu espaço comercial de forma cómoda e aprazível.
+            {% else %}
+            Our products excel in quality and attention to detail, ensuring commercial and operational excellence - Therefore, enabling the end customer to enjoy commercial facilities in a comfortable and pleasant way.
+            {% endif %}
+        </p>
+        <br>
+        <!-- Slogan -->
+        <h2 class="text-uppercase laranja bold">Our detail is your success</h2>
+        <br>
+        <div class="w-100 text-center services ml-0">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-">
+                    <img class="img-fluid" src="{% static '/img/icones/desenvolvimento.png' %}" />
+                </div>
+                <div class="col-sm py-3">
+                    <h5 class="text-justify bold cinzento text-uppercase" style="padding-bottom: 2px;">
+                        {% if lang == "pt" %}
+                        Desenvolvimento Tecnológico
+                        {% else %}
+                        Technological Development
+                        {% endif %}
+                    </h5>
+                    <p class="text-justify">
+                        {% if lang == "pt" %}
+                        Utilizamos as mais recentes tecnologias de desenvolvimento e produção para garantir a solução mais
+                        ajustada a cada projecto.
+                        {% else %}
+                        We rely on the latest development and production technologies to guarantee the most suitable solution
+                        for each project.
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+            <br>
+            <div class="row justify-content-center align-items-center">
+                <div class="col-">
+                    <img class="img-fluid" src="{% static '/img/icones/especializada.png' %}" />
+                </div>
+                <div class="col-sm py-3">
+                    <h5 class="text-justify bold cinzento text-uppercase">
+                        {% if lang == "pt" %}
+                        Equipa especializada
+                        {% else %}
+                        Specialized team
+                        {% endif %}
+                    </h5>
+                    <p class="text-justify">
+                        {% if lang == "pt" %}
+                        Somos uma equipa dinâmica e motivada, com vocação para a inovação.
+                        Existimos para transformar a sua visão em Realidade.
+                        {% else %}
+                        We are a dynamic and motivated team, with a vocation for innovation.
+                        We exist to transform your vision into reality.
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            <div class=" row justify-content-center align-items-center">
+                <div class="col- justify-content-left">
+                    <img class="img-fluid" src="{% static '/img/icones/acompanhamento.png' %}" />
+                </div>
+                <div class="col-sm py-3">
+                    <h5 class="text-justify bold cinzento text-uppercase">
+                        {% if lang == "pt" %}
+                        Acompanhamento 360°
+                        {% else %}
+                        360° Support
+                        {% endif %}
+                    </h5>
+                    <p class="text-justify">
+                        {% if lang == "pt" %}
+                        Da ideia inicial, ao desenvolvimento e instalação final, conte com o nosso acompanhamento de
+                        proximidade.
+                        {% else %}
+                        From the initial idea, to the development and final installation, you can count on the full support from our team.
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6" style="padding: 20px 30px 20px 30px">
+        <div id="demo" class="carousel slide text-center row justify-content-center align-self-center" data-ride="carousel" data-interval="2000" data-pause="hover">
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                <li data-target="#demo" data-slide-to="1"></li>
+                <li data-target="#demo" data-slide-to="2"></li>
+                <li data-target="#demo" data-slide-to="3"></li>
+                <li data-target="#demo" data-slide-to="4"></li>
+                <li data-target="#demo" data-slide-to="5"></li>
+            </ul>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="img-fluid img-thumbnail rounded" src="{% static '/img/slider/laser.jpg' %}" alt="laser">
+                </div>
+                <div class="carousel-item">
+                    <img class="img-fluid img-thumbnail rounded" src="{% static '/img/slider/laser1.jpg' %}" alt="laser1">
+                </div>
+                <div class="carousel-item">
+                    <img class="img-fluid img-thumbnail rounded" src="{% static '/img/slider/puncionadora1.jpg' %}" alt="puncionadora1">
+                </div>
+                <div class="carousel-item">
+                    <img class="img-fluid img-thumbnail rounded" src="{% static '/img/slider/puncionadora.jpg' %}" alt="puncionadora">
+                </div>
+                <div class="carousel-item">
+                    <img class="img-fluid img-thumbnail rounded" src="{% static '/img/slider/quinagem.jpg' %}" alt="quinagem">
+                </div>
+                <div class="carousel-item">
+                    <img class="img-fluid img-thumbnail rounded" src="{% static '/img/slider/soldadura.jpg' %}" alt="soldadura">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

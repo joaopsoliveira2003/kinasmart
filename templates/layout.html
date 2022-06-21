@@ -1,0 +1,352 @@
+{% load static %}
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+    <title>Kinasmart - {{title}}</title>
+    <meta charset="utf-8">
+    <meta name="title" content="Kinasmart, Lda">
+    <meta name="author" content="joaooliv01 + marciotroll">
+    <meta name="description" content="Produção e instalação de equipamentos para exposição de produtos em espaços comerciais">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kinasmart.com/">
+    <meta property="og:title" content="Kinasmart, Lda">
+    <meta property="og:description" content="Produção e instalação de equipamentos para exposição de produtos em espaços comerciais">
+    <meta property="og:image" content="https://kinasmart.com/static/img/esbocos/frente.jpg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kinasmart.com/">
+    <meta property="twitter:title" content="Kinasmart, Lda">
+    <meta property="twitter:description" content="Produção e instalação de equipamentos para exposição de produtos em espaços comerciais">
+    <meta property="twitter:image" content="https://kinasmart.com/static/img/esbocos/frente.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" href="{% static '/external/bootstrap.css' %}">
+    <script src="{% static '/external/jquery.js' %}"></script>
+    <script src="{% static '/external/bootstrap.bundle.js' %}"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        @font-face {
+            font-family: Exo2-ExtraLight;
+            src: url("{% static '/fonts/Exo2-ExtraLight.otf' %}");
+        }
+        @font-face {
+            font-family: Exo2-Medium;
+            src: url("{% static '/fonts/Exo2-Medium.otf' %}");
+        }
+        @font-face {
+            font-family: Exo2-Bold;
+            src: url("{% static '/fonts/Exo2-Bold.otf' %}");
+        }
+        @font-face {
+            font-family: Exo2-ExtraBold;
+            src: url("{% static '/fonts/Exo2-ExtraBold.otf' %}");
+        }
+        @font-face {
+            font-family: Exo2-SemiBold;
+            src: url("{% static '/fonts/Exo2-SemiBold.otf' %}");
+        }
+        body,
+        html {
+            color:#7c7c7d;
+            height: 100%;
+            margin: 0;
+            position: relative;
+            min-height: 100%;
+            font-family: Exo2-ExtraLight;
+            margin-bottom: 60px;
+            background-color: #f2f2f2;
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+        #sidebar {
+            background-color: #e94e1b;
+            width: 40px;
+            height: 100%;
+            position: fixed !important;
+            z-index: 1;
+            display: block;
+        }
+        #sidebar img {
+            bottom: 0;
+            position: absolute;
+            height: 27px;
+            width: 34px;
+            padding-left: 4px;
+        }
+        .telemovel {
+            {% if lang != "pt" %}
+            margin-bottom: 280px;
+            {% else %}
+            margin-bottom: 300px;
+            {% endif %}
+        }
+        .mail {
+            {% if lang != "pt" %}
+            margin-bottom: 240px;
+            {% else %}
+            margin-bottom: 260px;
+            {% endif %}
+        }
+        .facebook {
+            {% if lang != "pt" %}
+            margin-bottom: 200px;
+            {% else %}
+            margin-bottom: 220px;
+            {% endif %}
+        }
+        .linked {
+            {% if lang != "pt" %}
+            margin-bottom: 160px;
+            {% else %}
+            margin-bottom: 180px;
+            {% endif %}
+        }
+        #conteudo {
+            padding-top: 74px !important;
+            padding-left: 40px !important;
+            margin-right: 0px;
+            height: 100%;
+        }
+        .nav-item a:hover {
+            color: #e94e1b !important;
+        }
+        #topbt {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #9d9d9c;
+            color: white;
+            cursor: pointer;
+            border-radius: 100%;
+            font-size: 20px;
+            padding-top: 5px !important;
+            padding-bottom: 3px !important;
+            padding-left: 8px !important;
+            padding-right: 8px !important;
+        }
+        #topbt:hover {
+            background-color: #e94e1b;
+        }
+        .h-100-modified {
+            min-height: 100%;
+        }
+        .navbar{
+            font-family: Exo2-Medium;
+        }
+        #footer {
+            border-top: 1px solid #dee2e6; 
+            background-color: white; 
+            color: #7c7c7d;
+            font-size: medium;
+        }
+        .semibold {
+            font-family: Exo2-SemiBold;;
+        }
+        .bold {
+            font-family: Exo2-Bold;
+        }
+        .medium {
+            font-family: Exo2-Medium;
+        }
+        .extrabold {
+            font-family: Exo2-ExtraBold;
+        }
+        .rounded {
+            border-radius: 30px !important;
+        }
+        .cinzento{
+            color: #6b6b66;
+        }
+        .laranja {
+            color:#e94e1b !important;
+        }
+        .card:hover {
+            border: 2px solid #e94e1b !important;
+        }
+        .img-thumbnail {
+            padding: 1px;
+        }
+        .orange-bar {
+            height: 3px;
+            width: 50px;
+            background: #e94e1b;
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-light text-center fixed-top border-bottom" style="margin-left: -5px">
+            <a href="{% url 'index' %}" class="navbar-brand semibold my-0 py-0" style="color: #e94e1b !important; font-size: 38px;">Kinasmart</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto text-uppercase">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/'  %}laranja{% endif %}" href="{% url 'index' %}">
+                            {% if lang == "pt" %}
+                            Início
+                            {% else %}
+                            Home
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/about/'  %}laranja{% endif %}" href="{% url 'about' %}">
+                            {% if lang == "pt" %}
+                            Sobre Nós
+                            {% else %}
+                            About Us
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/services/'  %}laranja{% endif %}" href="{% url 'services' %}">
+                            {% if lang == "pt" %}
+                            Serviços
+                            {% else %}
+                            Services
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if '/products/' in request.path  %}laranja{% endif %}" href="{% url 'products' %}">
+                            {% if lang == "pt" %}
+                            Produtos
+                            {% else %}
+                            Products
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/contacts/' %}laranja{% endif %}" href="{% url 'contacts' %}">
+                            {% if lang == "pt" %}
+                            Contactos
+                            {% else %}
+                            Contacts
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <form id="form_lang" method="POST" action="{% url 'language' %}">
+                            <input class="d-none" type="number" name="id_lang" value="{% if lang == 'pt' %}1{% else %}0{% endif %}">
+                            <input class="d-none" type="text" name="redirect" value="{{request.path}}">
+                            {% csrf_token %}
+                            <a style="cursor: pointer" class="nav-link pt-1 pb-0" data-toggle="tooltip" data-placement="left" title="{% if lang == 'pt' %}Language{% else %}Idioma{% endif %}" onclick="this.parentNode.submit()">
+                                <span class="material-icons user-select-none align-middle d-inline-block">language</span>
+                                <span class="d-md-none align-middle">{% if lang == 'pt' %}Language{% else %}Idioma{% endif %}</span>
+                            </a>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div id="sidebar">
+        <div class="d-none">
+            <img src="{% static 'img/icones/telemovel-hover.png' %}">
+            <img src="{% static 'img/icones/mail-hover.png' %}">
+            <img src="{% static 'img/icones/facebook-hover.png' %}">
+            <img src="{% static 'img/icones/linked-hover.png' %}">
+        </div>
+        <a href="tel:+351234726348">
+            <img class="telemovel" onmouseover="imghover(this, true)" onmouseleave="imghover(this, false)" src="{% static 'img/icones/telemovel-default.png' %}" alt="telemovel">
+        </a>
+        <a href="mailto:kinasmart@kinasmart.com">
+            <img class="mail" onmouseover="imghover(this, true)" onmouseleave="imghover(this, false)" src="{% static 'img/icones/mail-default.png' %}" alt="mail">
+        </a>
+        <a href="https://www.facebook.com/Kinasmart-Lda-102741597803576" target="_blank">
+            <img class="facebook" onmouseover="imghover(this, true)" onmouseleave="imghover(this, false)" src="{% static 'img/icones/facebook-default.png' %}" alt="facebook">
+        </a>
+        <a href="https://www.linkedin.com/in/kinasmart-lda-633410195/" target="_blank">
+            <img class="linked" onmouseover="imghover(this, true)" onmouseleave="imghover(this, false)" src="{% static 'img/icones/linked-default.png' %}" alt="linked">
+        </a>
+        <a class="text-uppercase position-absolute text-white mr-0 overflow-hidden" style="font-size: 14px; writing-mode: vertical-rl; text-orientation: mixed; bottom: 0; margin-bottom: 65px; transform: rotate(180deg); margin-left: 8px">
+            {% if lang == "pt" %}
+                Contacte-nos
+            {% else %}
+                Contact Us
+            {% endif %}
+        </a><br>
+        <a href="{% url 'index' %}"><img style="height: 45px; width: 30px; padding-left: 7px; margin-bottom: 5px" src="{% static '/img/icones/logo.png' %}"></a>
+    </div>
+    <div id="conteudo" class="text-center">
+        <noscript>
+            <div class="alert alert-dark fixed-top" style="margin-top: 71px">
+                <strong>
+                    {% if lang == "pt" %}
+                        JavaScript Desativado!
+                    {% else %}
+                        JavaScript Disabled!
+                    {% endif %}
+                </strong>
+                {% if lang == "pt" %}
+                    Por favor ative para desbloquear todas as funcionalidades do website!
+                {% else %}
+                    Please turn on JavaScript in your browser to unlock all features in the website!
+                {% endif %}
+              </div>
+              <br><br>
+        </noscript>
+        {% block conteudo %}
+        {% endblock %}
+        <div id="footer" class="text-center py-6">
+            <div class="py-1"> 
+                {% if lang == "pt" %}
+                Somos inovadores e experientes. Oferecemos soluções de vanguarda na área da metalomecânica.
+                {% else %}
+                We are innovative and experienced. We offer cutting edge solutions in the field of metalworking.
+                {% endif %}
+            </div>
+            <div class="py-1 bold" style="border-top: 1px solid #dee2e6">
+                &copy; Kinasmart - {{copyright}} &trade;
+            </div>
+        </div>
+    </div>
+    <button onclick="gototop()" id="topbt">
+        <span class="material-icons user-select-none py-1">arrow_upward</span>
+    </button>
+    <script>
+        function mostrar_ocultar_tooltip(){
+            if ($(window).width() < 768) {
+                $('[data-toggle="tooltip"]').tooltip('disable')
+            } else {
+                $('[data-toggle="tooltip"]').tooltip('enable')
+            }
+        }
+
+        $(() => {
+            $('[data-toggle="tooltip"]').tooltip()
+            mostrar_ocultar_tooltip()
+        })
+        $(window).resize(() => {
+            mostrar_ocultar_tooltip()
+        })
+        function imghover(img, status) {
+            if (status) {
+                img.src = `{% static 'img/icones/' %}${img.alt}-hover.png`
+            } else {
+                img.src = `{% static 'img/icones/' %}${img.alt}-default.png`
+            }
+        }
+        window.onscroll = () => {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                $("#topbt").css("display", "block")
+            } else {
+                $("#topbt").css("display", "none")
+            }
+        }
+        function gototop() {
+            $("html, body").animate({
+                scrollTop: 0
+            }, 500, 'swing')
+        }
+    </script>
+</body>
+</html>
